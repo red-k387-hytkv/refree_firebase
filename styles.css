@@ -1,0 +1,146 @@
+html, body {
+    height: 100vh; /* ビューポートの高さに合わせる */
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    height: 100vh; /* ビューポートの高さに合わせる */
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.content-box {
+    margin-bottom: 10px;
+}
+
+.top-button {
+    display: flex;
+    flex-direction: row; /* 要素を水平に並べる */
+    justify-content: space-between; /* 要素を等間隔で配置 */
+}
+
+.top-button .content-box {
+    flex: 1; /* 各要素の幅を均等にする */
+    margin-right: 10px; /* 各要素の間に隙間をつける */
+    height: 40px; /* ボタンの高さを40pxに設定 */
+    width: 40px; /* ボタンの幅を40pxに設定 */
+    margin-top: 0px; /* 上部余白を削除 */
+    margin-bottom: 0px; /* 下部余白を削除 */
+}
+
+.top-button .content-box:last-child {
+    margin-right: 0; /* 最後の要素の右側の余白を削除する */
+}
+
+.scoreboard {
+    display: flex;
+    flex: 1; /* スコアボードが残りの高さの2/7を占める */
+    background-color: #cceeff; /* 水色 */
+}
+
+.left-score,
+.right-score {
+    flex: 1; /* 左右のスコアが同じ割合で横に配置 */
+    background-color: #ff9999; /* ライトピンク */
+}
+
+.right-score {
+    background-color: #99ccff; /* ライトブルー */
+}
+
+.coat {
+    display: flex;
+    flex: 2; /* コート全体が残りの高さの3/7を占める */
+}
+.left-coat{
+    border-right-color: red;
+}
+
+.left-coat,
+.right-coat {
+    display: flex;
+    flex-direction: row; /* 横方向に配置 */
+    flex: 1; /* 左右均等に配置 */
+    flex-wrap: wrap; /* 要素を折り返す */
+}
+
+.left-coat .content-box,
+.right-coat .content-box {
+    flex: 1 1 50%; /* 2列に配置 */
+    height: 33.33%; /* 高さを均等に3分割 */
+    box-sizing: border-box; /* ボックスサイズ設定 */
+    padding: 4px; /* 内側の余白 */
+    background-color: #f0f0f0; /* ボックスの背景色 */
+    border: 1px solid black; /* 黒いボーダーを追加 */
+    margin-bottom: 0px; /* 下部余白を削除 */
+}
+
+.left-coat {
+    background-color: white; /* LightSteelBlue */
+}
+
+.right-coat {
+    background-color: white; /* LightBlue */
+}
+
+
+@media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
+    /* iPhone landscape and portrait styles */
+    .content {
+        padding: 0;
+    }
+}
+.middle-button {
+    display: flex;
+    flex-direction: row; /* 要素を水平に並べる */
+    justify-content: space-between; /* 要素を等間隔で配置 */
+}
+.middle-button .content-box {
+    flex: 1; /* 各要素の幅を均等にする */
+    margin-right: 10px; /* 各要素の間に隙間をつける */
+    height: 40px; /* ボタンの高さを40pxに設定 */
+    width: 55px; /* ボタンの幅を40pxに設定 */
+    margin-bottom: 0px; /* 下部余白を削除 */
+}
+.middle-button .content-box:last-child {
+    margin-right: 0; /* 最後の要素の右側の余白を削除する */
+}
+.main-button {
+    display: flex;
+    flex-direction: row; /* 要素を水平に並べる */
+    justify-content: space-between; /* 要素を等間隔で配置 */
+}
+.main-button .content-box {
+    flex: 1; /* 各要素の幅を均等にする */
+    margin-right: 10px; /* 各要素の間に隙間をつける */
+    height: 40px; /* ボタンの高さを40pxに設定 */
+    width: 55px; /* ボタンの幅を40pxに設定 */
+    margin-bottom: 0px; /* 下部余白を削除 */
+}
+.main-button .content-box:last-child {
+    margin-right: 0; /* 最後の要素の右側の余白を削除する */
+}
+.bottom-button {
+    display: flex;
+    flex-direction: row; /* 要素を水平に並べる */
+    justify-content: space-between; /* 要素を等間隔で配置 */
+}
+.bottom-button .content-box {
+    flex: 1; /* 各要素の幅を均等にする */
+    margin-right: 10px; /* 各要素の間に隙間をつける */
+    height: 40px; /* ボタンの高さを40pxに設定 */
+    width: 55px; /* ボタンの幅を40pxに設定 */
+    margin-bottom: 0px; /* 下部余白を削除 */
+}
+.bottom-button .content-box:last-child {
+    margin-right: 0; /* 最後の要素の右側の余白を削除する */
+}
+.player {
+    width: 100%; /* 親要素と同じ幅 */
+    height: 100%; /* 親要素と同じ高さ */
+    box-sizing: border-box; /* パディングとボーダーを含むサイズ計算 */
+    top: 0; /* 親要素の上端に合わせる */
+    left: 0; /* 親要素の左端に合わせる */
+}
