@@ -14,7 +14,24 @@ html, body {
 .content-box {
     margin-bottom: 10px;
 }
+/* ボタンの基本スタイル */
+.content-box {
+    margin-bottom: 10px;
+    background-color: #064566; /* Bootstrapのプライマリーブルー風 */
+    color: white; /* 文字色を白に */
+    border: none; /* ボーダーを削除 */
+    font-size: 10px; /* フォントサイズを大きく */
+    border-radius: 5px; /* 角を丸く */
+    transition: background-color 0.3s, color 0.3s; /* スムーズな色変更 */
+    border: 1px solid black; /* 黒いボーダーを追加 */
+}
 
+/* ボタンにマウスを乗せた時のホバー効果 */
+.content-box:hover {
+    background-color: #ff9e50; /* 暗めのブルーに変更 */
+    color: #ffffff; /* 念の為、白を指定 */
+    cursor: pointer; /* カーソルをポインターに */
+}
 .top-button {
     display: flex;
     flex-direction: row; /* 要素を水平に並べる */
@@ -37,13 +54,13 @@ html, body {
 .scoreboard {
     display: flex;
     flex: 1; /* スコアボードが残りの高さの2/7を占める */
-    background-color: #cceeff; /* 水色 */
+    background-color: #16365e; 
 }
 
 .left-score,
 .right-score {
     flex: 1; /* 左右のスコアが同じ割合で横に配置 */
-    background-color: lightyellow; /* ライトピンク */
+    background-color: lightsteelblue; 
     border: 1px solid black; /* 黒いボーダーを追加 */
     border-left-color: black;
     padding: 4px; /* 内側の余白 */
@@ -90,7 +107,9 @@ html, body {
 .right-coat {
     background-color: white; /* LightBlue */
 }
-
+.player{
+    border-radius: 5px; /* 角を丸く */
+}
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
     /* iPhone landscape and portrait styles */
