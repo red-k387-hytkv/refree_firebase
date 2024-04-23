@@ -17,7 +17,7 @@ html, body {
 /* ボタンの基本スタイル */
 .content-box {
     margin-bottom: 10px;
-    background-color: #064566; /* Bootstrapのプライマリーブルー風 */
+    background-color: #064566; 
     color: white; /* 文字色を白に */
     border: none; /* ボーダーを削除 */
     font-size: 10px; /* フォントサイズを大きく */
@@ -71,6 +71,9 @@ html, body {
     box-sizing: border-box; /* パディングとボーダーを含むサイズ計算 */
     top: 0; /* 親要素の上端に合わせる */
     left: 0; /* 親要素の左端に合わせる */
+    font-size: 100px;
+    text-align: center;
+
 }
 .coat {
     display: flex;
@@ -92,7 +95,7 @@ html, body {
     height: 33.33%; /* 高さを均等に3分割 */
     box-sizing: border-box; /* ボックスサイズ設定 */
     padding: 4px; /* 内側の余白 */
-    background-color: #f0f0f0; /* ボックスの背景色 */
+    background-color: lightsteelblue; /* ボックスの背景色 */
     border: 1px solid black; /* 黒いボーダーを追加 */
     margin-bottom: 0px; /* 下部余白を削除 */
 }
@@ -109,6 +112,7 @@ html, body {
 }
 .player{
     border-radius: 5px; /* 角を丸く */
+    font-size: 60px;
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-width: 667px) {
@@ -163,8 +167,8 @@ html, body {
     margin-right: 0; /* 最後の要素の右側の余白を削除する */
 }
 .player {
-    width: 100%; /* 親要素と同じ幅 */
-    height: 100%; /* 親要素と同じ高さ */
+    width: 50%; /* 親要素と同じ幅 */
+    height: 33%; /* 親要素と同じ高さ */
     box-sizing: border-box; /* パディングとボーダーを含むサイズ計算 */
     top: 0; /* 親要素の上端に合わせる */
     left: 0; /* 親要素の左端に合わせる */

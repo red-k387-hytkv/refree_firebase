@@ -3,28 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VolleyBallRefree</title>
+    <title>VolleyBallReferee</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <main class="content">
         <div class="top-button">
-            <button class="content-box">＋</button>
-            <button class="content-box">ー</button>
-            <button class="content-box">ー</button>
-            <button class="content-box">＋</button>
+            <button class="content-box" onclick="increaseScore('left')">＋</button>
+            <button class="content-box" onclick="decreaseScore('left')">ー</button>
+            <button class="content-box" onclick="decreaseScore('right')">ー</button>
+            <button class="content-box" onclick="increaseScore('right')">＋</button>
         </div>
         <div class="scoreboard">
-            <div class="left-score"><textarea class="score"></textarea></div>
-            <div class="right-score"><textarea class="score"></textarea></div>
+            <div class="left-score">
+                <input id="left-score" class="score" type="text" maxlength="2" oninput="validateInput(this)" placeholder="0" readonly>
+            </div>
+            <div class="right-score">
+                <input id="right-score" class="score" type="text" maxlength="2" oninput="validateInput(this)" placeholder="0" readonly>
+            </div>
         </div>
         <div class="middle-button">
-            <button class="content-box"><img src="./img/rotation.png" height ="30" width="30" /></button>
-            <button class="content-box"><img src="./img/revers.png" height ="30" width="30" /></button>
+            <button class="content-box"><img src="./img/rotation.png" height="30" width="30"></button>
+            <button class="content-box"><img src="./img/revers.png" height="30" width="30"></button>
+            <button class="content-box">サーブ権</button>
             <button class="content-box">コート<br>移動</button>
-            <button class="content-box">サーブ権<br>移動</button>
-            <button class="content-box"><img src="./img/revers.png" height ="30" width="30" /></button>
-            <button class="content-box"><img src="./img/rotation.png" height ="30" width="30" /></button>
+            <button class="content-box">サーブ権</button>
+            <button class="content-box"><img src="./img/revers.png" height="30" width="30"></button>
+            <button class="content-box"><img src="./img/rotation.png" height="30" width="30"></button>
         </div>
         <div class="main-button">
             <button class="content-box">得点</button>
@@ -32,27 +37,58 @@
         </div>
         <div class="coat">
             <div class="left-coat">
-                <div class="content-box"><textarea class="player"></textarea></div>
-                <div class="content-box"><textarea class="player"></textarea></div>
-                <div class="content-box"><textarea class="player"></textarea></div>
-                <div class="content-box"><textarea class="player"></textarea></div>
-                <div class="content-box"><textarea class="player"></textarea></div>
-                <div class="content-box"><textarea class="player"></textarea></div>
+                <input type="text" id="left-player-5" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
+                <input type="text" id="left-player-4" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
+                <input type="text" id="left-player-6" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
+                <input type="text" id="left-player-3" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
+                <input type="text" id="left-player-1" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
+                <input type="text" id="left-player-2" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
             </div>
             <div class="right-coat">
-                <div class="content-box"><textarea class="player"></textarea></div>
-                <div class="content-box"><textarea class="player"></textarea></div>
-                <div class="content-box"><textarea class="player"></textarea></div>
-                <div class="content-box"><textarea class="player"></textarea></div>
-                <div class="content-box"><textarea class="player"></textarea></div>
-                <div class="content-box"><textarea class="player"></textarea></div>
+                <input type="text" id="right-player-2" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
+                <input type="text" id="right-player-1" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
+                <input type="text" id="right-player-3" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
+                <input type="text" id="right-player-6" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
+                <input type="text" id="right-player-4" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
+                <input type="text" id="right-player-5" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
             </div>
         </div>
         <div class="bottom-button">
-            <button class="content-box">得点をリセット</button>
+            <button class="content-box" onclick="resetScores()">得点をリセット</button>
             <button class="content-box">選手をリセット</button>
             <button class="content-box">全てリセット</button>
         </div>
     </main>
+    <script>
+        function increaseScore(side) {
+            const scoreBox = document.getElementById(`${side}-score`);
+            let score = parseInt(scoreBox.value) || 0;
+            scoreBox.value = score + 1;
+        }
+
+        function decreaseScore(side) {
+            const scoreBox = document.getElementById(`${side}-score`);
+            let score = parseInt(scoreBox.value) || 0;
+            if (score > 0) {
+                scoreBox.value = score - 1;
+            }
+        }
+
+        function resetScores() {
+            const leftScoreBox = document.getElementById('left-score');
+            const rightScoreBox = document.getElementById('right-score');
+            leftScoreBox.value = '0';
+            rightScoreBox.value = '0';
+        }
+
+        function validateInput(input) {
+            input.value = input.value.replace(/[^0-9]/g, '').slice(0, 2);
+        }
+
+        window.onload = function() {
+            adjustFontSize();  // Adjust on load
+            window.onresize = adjustFontSize;  // Adjust on resize
+        };
+    </script>
 </body>
 </html>
