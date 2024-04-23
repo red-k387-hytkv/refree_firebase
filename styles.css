@@ -43,20 +43,23 @@ html, body {
 .left-score,
 .right-score {
     flex: 1; /* 左右のスコアが同じ割合で横に配置 */
-    background-color: #ff9999; /* ライトピンク */
+    background-color: lightyellow; /* ライトピンク */
+    border: 1px solid black; /* 黒いボーダーを追加 */
+    border-left-color: black;
+    padding: 4px; /* 内側の余白 */
 }
-
-.right-score {
-    background-color: #99ccff; /* ライトブルー */
+.score {
+    width: 100%; /* 親要素と同じ幅 */
+    height: 100%; /* 親要素と同じ高さ */
+    box-sizing: border-box; /* パディングとボーダーを含むサイズ計算 */
+    top: 0; /* 親要素の上端に合わせる */
+    left: 0; /* 親要素の左端に合わせる */
 }
-
 .coat {
     display: flex;
     flex: 2; /* コート全体が残りの高さの3/7を占める */
 }
-.left-coat{
-    border-right-color: red;
-}
+
 
 .left-coat,
 .right-coat {
@@ -77,6 +80,9 @@ html, body {
     margin-bottom: 0px; /* 下部余白を削除 */
 }
 
+.left-coat{
+    border-right-color: red;
+}
 .left-coat {
     background-color: white; /* LightSteelBlue */
 }
