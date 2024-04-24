@@ -24,12 +24,13 @@
         </div>
         <div class="middle-button">
             <button class="content-box" onclick="rotatePlayersClockwise('left')"><img src="./img/rotation.png" height="30" width="30"></button>
-            <button class="content-box" onclick="rotatePlayersClockwise('left')"><img src="./img/revers.png" height="30" width="30"></button>
+            <button class="content-box" onclick="rotatePlayersCounterClockwise('left')"><img src="./img/revers.png" height="30" width="30"></button>
             <button class="content-box">サーブ権</button>
             <button class="content-box">コート<br>移動</button>
             <button class="content-box">サーブ権</button>
-            <button class="content-box" onclick="rotatePlayersClockwise('right')"><img src="./img/revers.png" height="30" width="30"></button>
+            <button class="content-box" onclick="rotatePlayersCounterClockwise('right')"><img src="./img/revers.png" height="30" width="30"></button>
             <button class="content-box" onclick="rotatePlayersClockwise('right')"><img src="./img/rotation.png" height="30" width="30"></button>
+            
         </div>
         <div class="main-button">
             <button class="content-box">得点</button>
@@ -107,10 +108,12 @@
             playerIds.forEach((id, index) => {
                 document.getElementById(id).value = playerValues[index];
             });
-        //反時計回り
-        function rotatePlayersCounterClockwise(side) {
-               // チームのプレイヤーのIDリストを動的に生成
-                const playerIds = [];
+       
+}
+ //反時計回り
+ function rotatePlayersCounterClockwise(side) {
+            // チームのプレイヤーのIDリストを動的に生成
+            const playerIds = [];
             for (let i = 1; i <= 6; i++) {
                 playerIds.push(`${side}-player-${i}`);
             }
@@ -125,8 +128,7 @@
             playerIds.forEach((id, index) => {
                 document.getElementById(id).value = playerValues[index];
             });
-}
-}
+        }           
 
     </script>
  
