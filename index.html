@@ -25,19 +25,19 @@
         <div class="middle-button">
             <button class="content-box" onclick="rotatePlayersClockwise('left')"><img src="./img/rotation.png" height="30" width="30"></button>
             <button class="content-box" onclick="rotatePlayersCounterClockwise('left')"><img src="./img/revers.png" height="30" width="30"></button>
-            <button class="content-box">サーブ権</button>
-            <button class="content-box">コート<br>移動</button>
-            <button class="content-box">サーブ権</button>
+            <button class="content-box" onclick="swapCourt()">コート<br>移動</button>
+            <button class="content-box" onclick="toggleServe()">サーブ権<br>切り替え</button>
             <button class="content-box" onclick="rotatePlayersCounterClockwise('right')"><img src="./img/revers.png" height="30" width="30"></button>
             <button class="content-box" onclick="rotatePlayersClockwise('right')"><img src="./img/rotation.png" height="30" width="30"></button>
             
         </div>
         <div class="main-button">
-            <button class="content-box">得点</button>
-            <button class="content-box">得点</button>
+            <button class="content-box" onclick="scoreAndRotateLeftTeam()">得点</button>
+            <button class="content-box" onclick="scoreAndRotateRightTeam()">得点</button>
         </div>
         <div class="coat">
             <div class="left-coat">
+                <input type="hidden" id="left-serve-flag" value="1"> <!-- 左チームが初期サーブ権を持つ -->
                 <input type="text" id="left-player-5" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
                 <input type="text" id="left-player-4" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
                 <input type="text" id="left-player-6" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
@@ -46,6 +46,7 @@
                 <input type="text" id="left-player-2" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
             </div>
             <div class="right-coat">
+                <input type="hidden" id="right-serve-flag" value="0"> <!-- 右チームは初期サーブ権を持たない -->
                 <input type="text" id="right-player-2" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
                 <input type="text" id="right-player-1" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
                 <input type="text" id="right-player-3" class="player" maxlength="2" oninput="validateInput(this)" placeholder="0">
@@ -56,9 +57,8 @@
         </div>
         <div class="bottom-button">
             <button class="content-box" onclick="resetScores()">得点をリセット</button>
-            <button class="content-box">選手をリセット</button>
-            <button class="content-box">全てリセット</button>
-        </div>
+            <button class="content-box" onclick="resetAllPlayers()">選手をリセット</button>
+            <button class="content-box" onclick="resetAll()">全てリセット</button>
     </main>
     <script>
         function increaseScore(side) {
@@ -130,7 +130,112 @@
             });
         }           
 
-    </script>
+    function resetPlayers(side) {
+    const playerInputs = document.querySelectorAll(`.${side}-coat .player`);
+    playerInputs.forEach(input => {
+        input.value = ''; // テキストボックスを空に設定
+    });
+}
+
+function resetAllPlayers() {
+    resetPlayers('left');
+    resetPlayers('right');
+}
+
+function resetAll() {
+    resetAllPlayers();
+    resetScores();
+}
+
+function toggleServe() {
+    // 左右のサーブフラグを取得
+    var leftServeFlag = document.getElementById('left-serve-flag');
+    var rightServeFlag = document.getElementById('right-serve-flag');
+
+    // 現在のサーブ権を反転させる
+    if (leftServeFlag.value === '1') {
+        leftServeFlag.value = '0';
+        rightServeFlag.value = '1';
+    } else {
+        leftServeFlag.value = '1';
+        rightServeFlag.value = '0';
+    }
+    updateServeHighlight();
+}
+
+function updateServeHighlight() {
+    var leftServeFlag = document.getElementById('left-serve-flag').value;
+    var rightServeFlag = document.getElementById('right-serve-flag').value;
+    var leftPlayer1Input = document.getElementById('left-player-1');
+    var rightPlayer1Input = document.getElementById('right-player-1');
+
+    // 左チームのサーブ権がある場合
+    if (leftServeFlag === '1') {
+        leftPlayer1Input.classList.add('serve-highlight');
+    } else {
+        leftPlayer1Input.classList.remove('serve-highlight');
+    }
+
+    // 右チームのサーブ権がある場合
+    if (rightServeFlag === '1') {
+        rightPlayer1Input.classList.add('serve-highlight');
+    } else {
+        rightPlayer1Input.classList.remove('serve-highlight');
+    }
+}
+window.onload = function() {
+    updateServeHighlight();
+};
+
+function swapCourt() {
+    // 得点の入れ替え
+    const leftScore = document.getElementById('left-score').value;
+    const rightScore = document.getElementById('right-score').value;
+    document.getElementById('left-score').value = rightScore;
+    document.getElementById('right-score').value = leftScore;
+
+    // プレイヤーの位置の入れ替え
+    for (let i = 1; i <= 6; i++) {
+        const leftPlayer = document.getElementById(`left-player-${i}`);
+        const rightPlayer = document.getElementById(`right-player-${i}`);
+        const temp = leftPlayer.value;
+        leftPlayer.value = rightPlayer.value;
+        rightPlayer.value = temp;
+    }
+    toggleServe()
+}
+
+function scoreAndRotateRightTeam() {
+    // 右チームに得点を追加
+    increaseScore('right')
+
+    // 右チームのサーブ権を確認
+    const rightServeFlag = document.getElementById('right-serve-flag');
+    if (rightServeFlag.value === '0') {
+        // 右チームを時計回りにローテーション
+        rotatePlayersClockwise('right');
+        // 右チームにサーブ権を移す
+        toggleServe()
+    }
+}
+
+function scoreAndRotateLeftTeam() {
+    // 左チームに得点を追加
+    increaseScore('left')
+
+    // 左チームのサーブ権を確認
+    const leftServeFlag = document.getElementById('left-serve-flag');
+    if (leftServeFlag.value === '0') {
+        // 左チームを時計回りにローテーション
+        rotatePlayersClockwise('left');
+        // 左チームにサーブ権を移す
+        toggleServe()
+    }
+}
+</script>
  
+
+    </script>
+
 </body>
 </html>

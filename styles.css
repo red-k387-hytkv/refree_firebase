@@ -173,3 +173,8 @@ html, body {
     top: 0; /* 親要素の上端に合わせる */
     left: 0; /* 親要素の左端に合わせる */
 }
+.serve-highlight {
+    background-color: #ffdd59; /* 明るい黄色の背景 */
+    color: #000000; /* 黒色のテキスト */
+    font-weight: bold; /* テキストを太字に */
+}
