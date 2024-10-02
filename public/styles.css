@@ -166,6 +166,13 @@ html, body {
 .bottom-button .content-box:last-child {
     margin-right: 0; /* 最後の要素の右側の余白を削除する */
 }
+.last-button .content-box {
+    flex: 1; /* 各要素の幅を均等にする */
+    margin-right: 10px; /* 各要素の間に隙間をつける */
+    height: 20px; /* ボタンの高さを40pxに設定 */
+    width: 100%; /* ボタンの幅を40pxに設定 */
+    margin-bottom: 0px; /* 下部余白を削除 */
+}
 .player {
     width: 50%; /* 親要素と同じ幅 */
     height: 33%; /* 親要素と同じ高さ */
